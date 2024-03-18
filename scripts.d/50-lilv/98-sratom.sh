@@ -1,15 +1,13 @@
 #!/bin/bash
 
 SCRIPT_REPO="https://github.com/lv2/sratom.git"
-SCRIPT_COMMIT="1d48d40ac4948b1864ca09e9d0a26fdd71bbee8d"
+SCRIPT_COMMIT="89b805b095d62746171a4f13024b7d6ce58d2a99"
 
 ffbuild_enabled() {
     return 0
 }
 
 ffbuild_dockerbuild() {
-    cd "$FFBUILD_DLDIR/$SELF"
-
     mkdir build && cd build
 
     local myconf=(

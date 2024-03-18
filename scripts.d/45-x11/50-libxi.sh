@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SCRIPT_REPO="https://gitlab.freedesktop.org/xorg/lib/libxi.git"
-SCRIPT_COMMIT="09f3eb570fe79bfc0c430b6059d7b4acaf371c24"
+SCRIPT_COMMIT="57ce2e8ba4c1f1bc5792e14bc7082f3ebd0915be"
 
 ffbuild_enabled() {
     [[ $TARGET != linux* ]] && return -1
@@ -9,8 +9,6 @@ ffbuild_enabled() {
 }
 
 ffbuild_dockerbuild() {
-    cd "$FFBUILD_DLDIR/$SELF"
-
     autoreconf -i
 
     local myconf=(

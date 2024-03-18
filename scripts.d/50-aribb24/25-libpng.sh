@@ -1,15 +1,13 @@
 #!/bin/bash
 
 SCRIPT_REPO="https://github.com/glennrp/libpng.git"
-SCRIPT_COMMIT="f8e5fa92b0e37ab597616f554bee254157998227"
+SCRIPT_COMMIT="f1848a3b560ddcad065242268433af475948461e"
 
 ffbuild_enabled() {
     return 0
 }
 
 ffbuild_dockerbuild() {
-    cd "$FFBUILD_DLDIR/$SELF"
-
     autoreconf -i
 
     local myconf=(

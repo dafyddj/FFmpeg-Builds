@@ -1,15 +1,13 @@
 #!/bin/bash
 
 SCRIPT_REPO="https://github.com/drobilla/zix.git"
-SCRIPT_COMMIT="3d880e00f3a0d7129b642002c3fb51ddbb56ac96"
+SCRIPT_COMMIT="8ff1b1f0bbb788034671f2e269826f5552035424"
 
 ffbuild_enabled() {
     return 0
 }
 
 ffbuild_dockerbuild() {
-    cd "$FFBUILD_DLDIR/$SELF"
-
     mkdir build && cd build
 
     local myconf=(

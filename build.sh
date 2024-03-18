@@ -4,41 +4,11 @@ shopt -s globstar
 cd "$(dirname "$0")"
 source util/vars.sh
 
-get_output() {
-    (
-        SELF="$1"
-        source $1
-        if ffbuild_enabled; then
-            ffbuild_$2 || exit 0
-        else
-            ffbuild_un$2 || exit 0
-        fi
-    )
-}
-
 source "variants/${TARGET}-${VARIANT}.sh"
 
 for addin in ${ADDINS[*]}; do
     source "addins/${addin}.sh"
 done
-
-export FFBUILD_PREFIX="$(docker run --rm "$IMAGE" bash -c 'echo $FFBUILD_PREFIX')"
-
-for script in scripts.d/**/*.sh; do
-    FF_CONFIGURE+=" $(get_output $script configure)"
-    FF_CFLAGS+=" $(get_output $script cflags)"
-    FF_CXXFLAGS+=" $(get_output $script cxxflags)"
-    FF_LDFLAGS+=" $(get_output $script ldflags)"
-    FF_LDEXEFLAGS+=" $(get_output $script ldexeflags)"
-    FF_LIBS+=" $(get_output $script libs)"
-done
-
-FF_CONFIGURE="$(xargs <<< "$FF_CONFIGURE")"
-FF_CFLAGS="$(xargs <<< "$FF_CFLAGS")"
-FF_CXXFLAGS="$(xargs <<< "$FF_CXXFLAGS")"
-FF_LDFLAGS="$(xargs <<< "$FF_LDFLAGS")"
-FF_LDEXEFLAGS="$(xargs <<< "$FF_LDEXEFLAGS")"
-FF_LIBS="$(xargs <<< "$FF_LIBS")"
 
 TESTFILE="uidtestfile"
 rm -f "$TESTFILE"
@@ -46,6 +16,7 @@ docker run --rm -v "$PWD:/uidtestdir" "$IMAGE" touch "/uidtestdir/$TESTFILE"
 DOCKERUID="$(stat -c "%u" "$TESTFILE")"
 rm -f "$TESTFILE"
 [[ "$DOCKERUID" != "$(id -u)" ]] && UIDARGS=( -u "$(id -u):$(id -g)" ) || UIDARGS=()
+unset TESTFILE
 
 rm -rf ffbuild
 mkdir ffbuild
@@ -107,7 +78,7 @@ cat "$BUILD_SCRIPT"
 
 [[ -t 1 ]] && TTY_ARG="-t" || TTY_ARG=""
 
-docker run --rm -i $TTY_ARG "${UIDARGS[@]}" -v $PWD/ffbuild:/ffbuild -v "$BUILD_SCRIPT":/build.sh "$IMAGE" bash /build.sh
+docker run --rm -i $TTY_ARG "${UIDARGS[@]}" -v "$PWD/ffbuild":/ffbuild -v "$BUILD_SCRIPT":/build.sh "$IMAGE" bash /build.sh
 
 mkdir -p artifacts
 ARTIFACTS_PATH="$PWD/artifacts"

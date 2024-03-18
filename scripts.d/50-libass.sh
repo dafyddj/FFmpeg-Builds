@@ -1,15 +1,13 @@
 #!/bin/bash
 
 SCRIPT_REPO="https://github.com/libass/libass.git"
-SCRIPT_COMMIT="5c15c883a4783641f7e71a6a1f440209965eb64f"
+SCRIPT_COMMIT="649a7c2e1fc6f4188ea1a89968560715800b883d"
 
 ffbuild_enabled() {
     return 0
 }
 
 ffbuild_dockerbuild() {
-    cd "$FFBUILD_DLDIR/$SELF"
-
     ./autogen.sh
 
     local myconf=(

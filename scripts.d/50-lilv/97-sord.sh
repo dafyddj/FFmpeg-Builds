@@ -1,15 +1,13 @@
 #!/bin/bash
 
 SCRIPT_REPO="https://github.com/drobilla/sord.git"
-SCRIPT_COMMIT="4aae0ffa8b38106202fe96962981562a14a26fc1"
+SCRIPT_COMMIT="045b0389fc720608b57fa5243331e1d5a5eabece"
 
 ffbuild_enabled() {
     return 0
 }
 
 ffbuild_dockerbuild() {
-    cd "$FFBUILD_DLDIR/$SELF"
-
     mkdir build && cd build
 
     local myconf=(

@@ -1,15 +1,13 @@
 #!/bin/bash
 
 SCRIPT_REPO="https://github.com/drobilla/serd.git"
-SCRIPT_COMMIT="3df98b4f22773ec1d6d3230d88f14b430cdcf91e"
+SCRIPT_COMMIT="e85a6342217997905db42de5bb66a597c4d690cf"
 
 ffbuild_enabled() {
     return 0
 }
 
 ffbuild_dockerbuild() {
-    cd "$FFBUILD_DLDIR/$SELF"
-
     mkdir build && cd build
 
     local myconf=(

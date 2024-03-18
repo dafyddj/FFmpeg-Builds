@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SCRIPT_REPO="https://gitlab.freedesktop.org/xorg/lib/libxext.git"
-SCRIPT_COMMIT="de2ebd62c1eb8fe16c11aceac4a6981bda124cf4"
+SCRIPT_COMMIT="424b67ad03fafdb0d6caf2e9bf5a103e9717e71f"
 
 ffbuild_enabled() {
     [[ $TARGET != linux* ]] && return -1
@@ -9,8 +9,6 @@ ffbuild_enabled() {
 }
 
 ffbuild_dockerbuild() {
-    cd "$FFBUILD_DLDIR/$SELF"
-
     autoreconf -i
 
     local myconf=(

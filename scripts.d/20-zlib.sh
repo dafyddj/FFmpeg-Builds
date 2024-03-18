@@ -1,15 +1,13 @@
 #!/bin/bash
 
 SCRIPT_REPO="https://github.com/madler/zlib.git"
-SCRIPT_COMMIT="79a0e447a0dfa32979420cb21cfb96d684b2c9d5"
+SCRIPT_COMMIT="99b229487c2997b4b22eaef90fedfbff4d8826cc"
 
 ffbuild_enabled() {
     return 0
 }
 
 ffbuild_dockerbuild() {
-    cd "$FFBUILD_DLDIR/$SELF"
-
     local myconf=(
         --prefix="$FFBUILD_PREFIX"
         --static

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SCRIPT_REPO="https://gitlab.freedesktop.org/mesa/drm.git"
-SCRIPT_COMMIT="6abc164052e4902f67213baa279d743cf46227d4"
+SCRIPT_COMMIT="c8f327ce9cb504a6c2185487d576be3d5254556a"
 
 ffbuild_enabled() {
     [[ $TARGET != linux* ]] && return -1
@@ -9,8 +9,6 @@ ffbuild_enabled() {
 }
 
 ffbuild_dockerbuild() {
-    cd "$FFBUILD_DLDIR/$SELF"
-
     mkdir build && cd build
 
     local myconf=(

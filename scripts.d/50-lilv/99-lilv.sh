@@ -1,15 +1,13 @@
 #!/bin/bash
 
 SCRIPT_REPO="https://github.com/lv2/lilv.git"
-SCRIPT_COMMIT="fb0a4d0bf17af25f5a90f643695b016651867952"
+SCRIPT_COMMIT="2511f17ba30930668c5428420e7dad8c8879425e"
 
 ffbuild_enabled() {
     return 0
 }
 
 ffbuild_dockerbuild() {
-    cd "$FFBUILD_DLDIR/$SELF"
-
     mkdir build && cd build
 
     local myconf=(
